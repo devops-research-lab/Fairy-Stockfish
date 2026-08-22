@@ -19,6 +19,7 @@
 #include <iostream>
 #include <string>
 
+#include "description.h"
 #include "evaluate.h"
 #include "misc.h"
 #include "partner.h"
@@ -171,10 +172,11 @@ namespace XBoard {
   void rules(std::istringstream& is) {
 
     std::string token;
-    if (is >> token && variants.find(token) != variants.end())
-        sync_cout << variants.find(token) << sync_endl;
+    auto it = is >> token ? variants.find(token) : variants.end();
+    if (it != variants.end())
+        sync_cout << describe_variant(it->first, it->second) << sync_endl;
     else
-        sync_cout << "Error (unkown command): " << token << sync_endl;
+        sync_cout << "Error (unknown variant): " << token << sync_endl;
   }
 
 /// StateMachine::process_command() processes commands of the XBoard protocol.

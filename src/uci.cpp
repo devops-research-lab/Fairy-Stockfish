@@ -23,6 +23,7 @@
 #include <sstream>
 #include <string>
 
+#include "description.h"
 #include "evaluate.h"
 #include "movegen.h"
 #include "position.h"
@@ -289,8 +290,9 @@ namespace {
   void rules(istringstream& is) {
 
     string token;
-    if (is >> token && variants.find(token) != variants.end())
-        sync_cout << variants.find(token) << sync_endl;
+    auto it = is >> token ? variants.find(token) : variants.end();
+    if (it != variants.end())
+        sync_cout << describe_variant(it->first, it->second) << sync_endl;
     else
         sync_cout << "No such variant: " << token << sync_endl;
   }

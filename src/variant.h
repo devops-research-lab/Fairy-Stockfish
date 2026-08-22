@@ -242,8 +242,6 @@ private:
 
 extern VariantMap variants;
 
-extern std::ostream& operator<<(std::ostream& os, const VariantMap::iterator& variantIterator);
-
 } // namespace Stockfish
 
 #endif // #ifndef VARIANT_H_INCLUDED
